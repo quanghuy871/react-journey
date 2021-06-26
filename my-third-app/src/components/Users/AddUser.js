@@ -18,6 +18,11 @@ const AddUser = props => {
 
   const formSubmit = (e) => {
     e.preventDefault();
+
+    if (name.trim().length < 0 && age.trim().length < 0) {
+      return;
+    }
+
     const user = {
       name: name,
       age: age,
