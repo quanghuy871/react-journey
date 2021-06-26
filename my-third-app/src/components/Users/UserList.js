@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import Card from '../UI/Card';
 import UserItem from './UserItem';
 
@@ -10,9 +10,9 @@ const UserList = props => {
 
   return (
       <Card>
-        <div>
+        <Fragment>
           {list}
-        </div>
+        </Fragment>
       </Card>
   );
 };

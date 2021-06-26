@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {Fragment} from 'react';
+import ReactDom from 'react-dom';
 import Card from './Card';
 import Button from './Button/Button';
 
-const ErrorModal = props => {
+const modalOverlay = props => {
   return (
       <Card>
         <header>
@@ -17,6 +18,17 @@ const ErrorModal = props => {
           <Button onClick={props.onConfirm}>Okay</Button>
         </footer>
       </Card>
+  );
+};
+
+const ErrorModal = props => {
+  return (
+      <Fragment>
+        {ReactDom.createPortal(
+            <modalOverlay title={props.title} message={props.message} onConfirm={props.onConfirm}/>,
+            document.getElementById('overlay-root'),
+        )}
+      </Fragment>
   );
 };
 
