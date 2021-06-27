@@ -1,4 +1,4 @@
-import React, {useState, Fragment} from 'react';
+import React, {useState, Fragment, useRef} from 'react';
 import Button from '../UI/Button/Button';
 import Card from '../UI/Card';
 import ErrorModal from '../UI/ErrorModal';
@@ -7,6 +7,8 @@ const AddUser = props => {
   const [name, setName] = useState('');
   const [age, setAge] = useState('');
   const [error, setError] = useState('');
+  const enteredName = useRef();
+  const enteredAge = useRef();
 
   const nameHandler = (e) => {
     setName(e.target.value);
@@ -35,8 +37,8 @@ const AddUser = props => {
       id: Math.round(Math.random() * 1000),
     };
     props.onSaveUser(user);
-    setName('');
-    setAge('');
+    enteredName.current.value = '';
+    enteredAge.current.value = '';
   };
 
   const errorHandler = () => {
@@ -49,10 +51,10 @@ const AddUser = props => {
         <Card>
           <form onSubmit={formSubmit}>
             <label htmlFor="username">Username:</label>
-            <input id="username" type="text" onChange={nameHandler}/>
+            <input ref={enteredName} id="username" type="text" onChange={nameHandler}/>
 
             <label htmlFor="age">Age:</label>
-            <input id="age" type="text" onChange={ageHandler}/>
+            <input ref={enteredAge} id="age" type="text" onChange={ageHandler}/>
 
             <Button type="submit">ADD USER</Button>
           </form>
