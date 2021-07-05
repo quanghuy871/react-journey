@@ -47,7 +47,11 @@ const Login = (props) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    ctx.onLogin(enteredEmail, enteredPassword);
+    if (formIsValid) {
+      ctx.onLogin(enteredEmail, enteredPassword);
+    } else if (!emailIsValid) {
+
+    }
   };
 
   return (
