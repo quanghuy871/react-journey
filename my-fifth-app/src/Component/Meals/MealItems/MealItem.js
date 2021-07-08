@@ -9,7 +9,7 @@ const Meals = (props) => {
         <h3>{props.name}</h3>
         <div className={classes.description}>
           {props.description}
-        </div>
+        </div>xf
         <div className={classes.price}>
           {props.price}
         </div>
