@@ -1,17 +1,21 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import CartIcon from '../Cart/CartIcon';
 import classes from './HeaderCartButton.module.css';
-import Button from '../UI/Button';
+import CartContext from '../../store/cart-context';
 
 const HeaderCartButton = (props) => {
+  const cartCtx = useContext(CartContext);
+
+  const cartItem = cartCtx.items.reduce((acc, el) => acc + el.amount, 0);
+
   return (
-    <Button>
+    <button onClick={props.isModalShow} className={classes.button}>
       <span className={classes.icon}>
         <CartIcon/>
       </span>
       <span>Your Cart</span>
-      <span className={classes.badge}>7</span>
-    </Button>
+      <span className={classes.badge}>{cartItem}</span>
+    </button>
   );
 };
 
