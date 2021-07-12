@@ -6,7 +6,7 @@ import CartContext from '../../store/cart-context';
 const HeaderCartButton = (props) => {
   const cartCtx = useContext(CartContext);
 
-  const cartItem = cartCtx.items.reduce((acc, el) => acc + el.amount, 0);
+  const cartItems = cartCtx.items.reduce((acc, el) => acc + el.amount, 0);
 
   return (
     <button onClick={props.isModalShow} className={classes.button}>
@@ -14,7 +14,7 @@ const HeaderCartButton = (props) => {
         <CartIcon/>
       </span>
       <span>Your Cart</span>
-      <span className={classes.badge}>{cartItem}</span>
+      <span className={classes.badge}>{cartItems}</span>
     </button>
   );
 };

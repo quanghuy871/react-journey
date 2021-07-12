@@ -1,4 +1,20 @@
-import React from 'react';
+import React, {useReducer} from 'react';
+
+const defaultCartState = {
+  items: [],
+  totalAmount: 0,
+};
+
+const reducer = (state, action) => {
+  if (action.type === 'ADD') {
+    return {
+      items: state.items.concat(action.item),
+      totalAmount: state.totalAmount + action.item.price * action.item.amount,
+    };
+  }
+
+  return defaultCartState;
+};
 
 const CartContext = React.createContext({
   items: [],
@@ -8,17 +24,25 @@ const CartContext = React.createContext({
 });
 
 export const CartContextProvider = (props) => {
-  const addItemHandler = (item) => {
+  const [state, dispatch] = useReducer(reducer, defaultCartState);
 
+  const addItemHandler = (item) => {
+    dispatch({
+      type: 'ADD',
+      item: item,
+    });
   };
 
   const removeItemHandler = (id) => {
-
+    dispatch({
+      type: 'REMOVE',
+      id: id,
+    });
   };
 
   const cartContext = {
-    items: [],
-    totalAmount: 0,
+    items: state.items,
+    totalAmount: state.totalAmount,
     addItem: addItemHandler,
     removeITem: removeItemHandler,
   };
