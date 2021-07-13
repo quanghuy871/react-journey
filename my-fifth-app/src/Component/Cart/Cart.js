@@ -9,6 +9,7 @@ const Cart = (props) => {
   const cartItems = cartCtx.items.reduce((acc, el) => acc + el.amount, 0);
 
   const cartItem = cartCtx.items.map(el => <ul>
+
     <li>{el.name}</li>
   </ul>);
 
