@@ -14,7 +14,6 @@ const Cart = (props) => {
 
   return (
     <Modal isModalClose={props.isModalClose}>
-
       {cartItem}
       <div className={classes.total}>
         <span>Total Amount</span>
