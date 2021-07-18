@@ -35,6 +35,7 @@ export const CartContextProvider = (props) => {
 
   const removeItemHandler = (id) => {
     dispatch({
+
       type: 'REMOVE',
       id: id,
     });
