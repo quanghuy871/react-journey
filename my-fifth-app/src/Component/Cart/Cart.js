@@ -1,6 +1,7 @@
 import React, {useContext} from 'react';
 import classes from './Cart.module.css';
 import Modal from '../UI/Modal';
+import CartItem from './CartItem';
 import CartContext from '../../store/cart-context';
 
 const Cart = (props) => {
@@ -8,13 +9,22 @@ const Cart = (props) => {
 
   const cartItems = cartCtx.items.reduce((acc, el) => acc + el.amount, 0);
 
-  const cartItem = cartCtx.items.map(el => <ul>
-    <li>{el.name}</li>
-  </ul>);
+  const cartItem = cartCtx.items.map(el =>
+    <CartItem
+      key={el.id}
+      name={el.name}
+      amount={el.amount}
+      price={el.price}
+      onAdd={cartCtx.addItem}
+      onRemove={cartCtx.removeITem}
+    />,
+  );
 
   return (
     <Modal isModalClose={props.isModalClose}>
-      {cartItem}
+      <ul className={classes['cart-items']}>
+        {cartItem}
+      </ul>
       <div className={classes.total}>
         <span>Total Amount</span>
         <span>{cartItems} items = ${cartCtx.totalAmount.toFixed(2)}</span>

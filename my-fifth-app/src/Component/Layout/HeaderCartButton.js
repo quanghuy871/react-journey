@@ -7,6 +7,7 @@ const HeaderCartButton = (props) => {
   const cartCtx = useContext(CartContext);
 
   const cartItems = cartCtx.items.reduce((acc, el) => acc + el.amount, 0);
+  // console.log(cartItems);
 
   return (
     <button onClick={props.isModalShow} className={classes.button}>

@@ -11,7 +11,7 @@ const Header = (props) => {
         <HeaderCartButton isModalShow={props.isModalShow}/>
       </header>
       <div className={classes['main-image']}>
-        <img src={mealImage} alt="image"/>
+        <img src={mealImage} alt="icon"/>
       </div>
     </Fragment>
   );
