@@ -17,7 +17,6 @@ const reducer = (state, action) => {
         ...existCartItem,
         amount: existCartItem.amount + action.item.amount,
       };
-
       updatedItems = state.items;
       updatedItems[index] = updatedItem;
 
