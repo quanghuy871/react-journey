@@ -25,6 +25,7 @@ const reducer = (state, action) => {
     }
 
     return {
+
       items: updatedItems,
       totalAmount: updatedTotalAmount,
     };
