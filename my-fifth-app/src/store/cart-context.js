@@ -59,6 +59,7 @@ export const CartContextProvider = (props) => {
   };
 
   const cartContext = {
+
     items: state.items,
     totalAmount: state.totalAmount,
     addItem: addItemHandler,
