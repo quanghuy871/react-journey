@@ -7,8 +7,8 @@ const defaultCartState = {
 
 const reducer = (state, action) => {
   if (action.type === 'ADD') {
-    const updatedTotalAmount = state.totalAmount + action.item.price * action.item.amount;
     const index = state.items.findIndex(el => el.id === action.item.id);
+    const updatedTotalAmount = state.totalAmount + action.item.price * action.item.amount;
     const existCartItem = state.items[index];
     let updatedItems;
 
@@ -29,6 +29,7 @@ const reducer = (state, action) => {
       totalAmount: updatedTotalAmount,
     };
   }
+  
 
   return defaultCartState;
 };
@@ -59,7 +60,6 @@ export const CartContextProvider = (props) => {
   };
 
   const cartContext = {
-
     items: state.items,
     totalAmount: state.totalAmount,
     addItem: addItemHandler,
