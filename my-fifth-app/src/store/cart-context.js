@@ -29,7 +29,6 @@ const reducer = (state, action) => {
       totalAmount: updatedTotalAmount,
     };
   }
-  
 
   return defaultCartState;
 };
