@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 
 import MoviesList from './components/MoviesList';
 import AddMovie from './components/AddMovie';
@@ -13,13 +13,12 @@ function App() {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch('https://react-http-6b4a6.firebaseio.com/movies.json');
+      const response = await fetch('https://my-project-8b94b-default-rtdb.asia-southeast1.firebasedatabase.app/movies.json');
       if (!response.ok) {
         throw new Error('Something went wrong!');
       }
 
       const data = await response.json();
-
       const loadedMovies = [];
 
       for (const key in data) {
@@ -43,12 +42,12 @@ function App() {
   }, [fetchMoviesHandler]);
 
   async function addMovieHandler(movie) {
-    const response = await fetch('https://react-http-6b4a6.firebaseio.com/movies.json', {
+    const response = await fetch('https://my-project-8b94b-default-rtdb.asia-southeast1.firebasedatabase.app/movies.json', {
       method: 'POST',
       body: JSON.stringify(movie),
       headers: {
-        'Content-Type': 'application/json'
-      }
+        'Content-Type': 'application/json',
+      },
     });
     const data = await response.json();
     console.log(data);
@@ -57,7 +56,7 @@ function App() {
   let content = <p>Found no movies.</p>;
 
   if (movies.length > 0) {
-    content = <MoviesList movies={movies} />;
+    content = <MoviesList movies={movies}/>;
   }
 
   if (error) {
@@ -71,7 +70,7 @@ function App() {
   return (
     <React.Fragment>
       <section>
-        <AddMovie onAddMovie={addMovieHandler} />
+        <AddMovie onAddMovie={addMovieHandler}/>
       </section>
       <section>
         <button onClick={fetchMoviesHandler}>Fetch Movies</button>
