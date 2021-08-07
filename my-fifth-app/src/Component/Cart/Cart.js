@@ -38,7 +38,7 @@ const Cart = (props) => {
       </ul>
       <div className={classes.total}>
         <span>Total Amount</span>
-        <span>{cartItems} items = ${cartCtx.totalAmount.toFixed(2)}</span>
+        <span>{cartItems} item{cartItems >= 2 ? 's' : ''} = ${cartCtx.totalAmount.toFixed(2)}</span>
       </div>
       <div className={classes.actions}>
         <button onClick={props.isModalClose} className={classes['button--alt']}>Close</button>

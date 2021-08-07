@@ -20,9 +20,29 @@ const reducer = (state, action) => {
       updatedItems = [...state.items];
       updatedItems[index] = updatedItem;
 
-
     } else {
       updatedItems = state.items.concat(action.item);
+    }
+
+    return {
+      items: updatedItems,
+      totalAmount: updatedTotalAmount,
+    };
+  }
+
+  if (action.type === 'REMOVE') {
+    const item = state.items.find(el => el.id === action.id);
+    const index = state.items.findIndex(el => el.id === action.id);
+    const newItem = {
+      ...item,
+      amount: item.amount - 1,
+    };
+    const updatedItems = [...state.items];
+    updatedItems[index] = newItem;
+    const updatedTotalAmount = state.totalAmount - updatedItems[index].price;
+
+    if (updatedItems[index].amount === 0) {
+      updatedItems.splice(index, 1);
     }
 
     return {
