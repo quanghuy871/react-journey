@@ -32,6 +32,7 @@ const AvailableMeals = (props) => {
     };
 
     fetchMeals().catch((e) => {
+
       setLoading(false);
       setError(e.message);
     });
