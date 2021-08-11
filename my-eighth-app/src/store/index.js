@@ -21,6 +21,7 @@ const reducer = (state = initialState, action) => {
     return {
       counter: state.counter,
       toggle: !state.toggle,
+
     };
   }
 
