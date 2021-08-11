@@ -59,7 +59,6 @@ const CartContext = React.createContext({
   totalAmount: 0,
   addItem: (item) => {},
   removeITem: (id) => {},
-
 });
 
 export const CartContextProvider = (props) => {
