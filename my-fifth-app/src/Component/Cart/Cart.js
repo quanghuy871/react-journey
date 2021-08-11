@@ -2,6 +2,7 @@ import React, {useContext} from 'react';
 import classes from './Cart.module.css';
 import Modal from '../UI/Modal';
 import CartItem from './CartItem';
+import Checkout from './Checkout';
 import CartContext from '../../store/cart-context';
 
 const Cart = (props) => {
@@ -17,6 +18,16 @@ const Cart = (props) => {
     cartCtx.addItem({
       ...item,
       amount: 1,
+    });
+  };
+
+  const submitOrderHandler = (mealOrder) => {
+    fetch('https://meals-e7310-default-rtdb.asia-southeast1.firebasedatabase.app/order.json', {
+      method: 'POST',
+      body: JSON.stringify({
+        user: mealOrder,
+        item: cartCtx.items,
+      }),
     });
   };
 
@@ -40,6 +51,8 @@ const Cart = (props) => {
         <span>Total Amount</span>
         <span>{cartItems} item{cartItems >= 2 ? 's' : ''} = ${cartCtx.totalAmount.toFixed(2)}</span>
       </div>
+      <Checkout onConfirm={submitOrderHandler}/>
+
       <div className={classes.actions}>
         <button onClick={props.isModalClose} className={classes['button--alt']}>Close</button>
         <button className={classes.button}>Order</button>

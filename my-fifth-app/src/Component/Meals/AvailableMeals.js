@@ -32,7 +32,6 @@ const AvailableMeals = (props) => {
     };
 
     fetchMeals().catch((e) => {
-
       setLoading(false);
       setError(e.message);
     });
@@ -44,7 +43,7 @@ const AvailableMeals = (props) => {
       <Card>
         {loading && <p>Loading...</p>}
         {!loading && <ul>{mealList}</ul>}
-        {error}
+        <p>{error}</p>
       </Card>
     </section>
   );
