@@ -14,6 +14,7 @@ const reducer = (state = initialState, action) => {
     return {
       counter: state.counter - action.amount,
       toggle: state.toggle,
+
     };
   }
 
@@ -21,7 +22,6 @@ const reducer = (state = initialState, action) => {
     return {
       counter: state.counter,
       toggle: !state.toggle,
-
     };
   }
 
