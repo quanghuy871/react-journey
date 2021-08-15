@@ -1,4 +1,5 @@
 import {createStore} from 'redux';
+// import {}
 
 const initialState = {counter: 0, toggle: true};
 
@@ -14,7 +15,6 @@ const reducer = (state = initialState, action) => {
     return {
       counter: state.counter - action.amount,
       toggle: state.toggle,
-
     };
   }
 
@@ -24,7 +24,6 @@ const reducer = (state = initialState, action) => {
       toggle: !state.toggle,
     };
   }
-
 
   return state;
 };
