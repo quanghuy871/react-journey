@@ -3,7 +3,7 @@ import classes from './MealItem.module.css';
 import MealItemForm from './MealItemForm';
 import CartContext from '../../../store/cart-context';
 
-const Meals = (props) => {
+const mealItem = (props) => {
   const cartCtx = useContext(CartContext);
 
   const addAmountHandler = (amount) => {
@@ -33,4 +33,4 @@ const Meals = (props) => {
   );
 };
 
-export default Meals;
+export default mealItem;
