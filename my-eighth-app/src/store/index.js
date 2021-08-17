@@ -1,20 +1,34 @@
 // import {createStore} from 'redux';
 import {createSlice, configureStore} from '@reduxjs/toolkit';
 
-const initialState = {counter: 0, toggle: true};
+const initialCounterState = {value: 0, toggle: true};
+const authenticationState = {authentication: false};
 
 const counterSlice = createSlice({
   name: 'counter',
-  initialState,
+  initialState: initialCounterState,
   reducers: {
     increment(state) {
-      state.counter++;
+      state.value++;
     },
     decrement(state) {
-      state.counter--;
+      state.value--;
     },
     showToggle(state) {
       state.toggle = !state.toggle;
+    },
+  },
+});
+
+const authSlice = createSlice({
+  name: 'authenticator',
+  initialState: authenticationState,
+  reducers: {
+    login(state) {
+      state.authentication = true;
+    },
+    logout(state) {
+      state.authentication = false;
     },
   },
 });
@@ -46,9 +60,15 @@ const counterSlice = createSlice({
 
 // const store = createStore(reducer);
 const store = configureStore({
-  reducer: counterSlice.reducer,
+  reducer: {
+    counter: counterSlice.reducer, // this line will be the state object above
+    auth: authSlice.reducer,
+  },
 });
 
 export const {increment, decrement, showToggle} = counterSlice.actions;
+export const {login, logout} = authSlice.actions;
 
 export default store;
+
+////*note: when we put the value into the dispatch(fn(value)); --> value will be created as the payload
