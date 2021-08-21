@@ -16,7 +16,6 @@ const counterSlice = createSlice({
     },
     showToggle(state) {
       state.toggle = !state.toggle;
-
     },
   },
 });
