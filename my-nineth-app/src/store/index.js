@@ -41,6 +41,14 @@ const updateCartSlice = createSlice({
     toggle(state) {
       state.showToggle = !state.showToggle;
     },
+
+    showNotification(state, action) {
+      state.notification = {
+        status: action.payload.status,
+        title: action.payload.title,
+        message: action.payload.message,
+      };
+    },
   },
 });
 
