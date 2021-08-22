@@ -5,14 +5,14 @@ import {updateCart} from '../../store/index';
 
 const ProductItem = (props) => {
   const dispatch = useDispatch();
-  const {title, price, description} = props;
+  const {title, price, description, id, quantity} = props;
   const updateCartHandler = () => {
     dispatch(updateCart.updateCart({
-      title: title,
-      price: price,
-      description: description,
-      id: props.id,
-      quantity: props.quantity,
+      title,
+      price,
+      description,
+      id,
+      quantity,
     }));
   };
 

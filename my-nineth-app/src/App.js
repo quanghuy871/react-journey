@@ -4,7 +4,7 @@ import Products from './components/Shop/Products';
 import {useSelector} from 'react-redux';
 
 function App() {
-  const toggle = useSelector(state => state.showToggle.showToggle);
+  const toggle = useSelector(state => state.showToggle);
 
   return (
     <Layout>

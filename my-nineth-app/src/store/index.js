@@ -6,33 +6,48 @@ const initialState = {
   showToggle: false,
 };
 
-const openCartSlice = createSlice({
-  name: 'Toggle Cart',
+const updateCartSlice = createSlice({
+  name: 'Update Cart',
   initialState: initialState,
   reducers: {
+    updateCart(state, action) {
+      const index = state.items.findIndex(el => action.payload.id === el.id);
+      const existItem = state.items[index];
+      state.totalAmount++;
+
+      if (existItem) {
+        existItem.quantity++;
+      } else {
+        state.items.push(action.payload);
+      }
+    },
+
+    increment(state, action) {
+      const existItem = state.items.find(el => action.payload === el.id);
+      existItem.quantity++;
+      state.totalAmount++;
+    },
+
+    decrement(state, action) {
+      const existItem = state.items.find(el => action.payload === el.id);
+      state.totalAmount--;
+      if (existItem.quantity === 1) {
+        state.items.splice(state.items.findIndex(el => action.payload === el.id), 1);
+      } else {
+        existItem.quantity--;
+      }
+    },
+
     toggle(state) {
       state.showToggle = !state.showToggle;
     },
   },
 });
 
-const updateCartSlice = createSlice({
-  name: 'Update Cart',
-  initialState: initialState,
-  reducers: {
-    updateCart(state, action) {
-      state.items.push(action.payload);
-    },
-  },
-});
-
 const store = configureStore({
-  reducer: {
-    updateCart: updateCartSlice.reducer,
-    showToggle: openCartSlice.reducer,
-  },
+  reducer: updateCartSlice.reducer,
 });
 
-export const {toggle} = openCartSlice.actions;
+export const {toggle} = updateCartSlice.actions;
 export const updateCart = updateCartSlice.actions;
 export default store;
