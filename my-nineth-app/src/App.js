@@ -5,7 +5,7 @@ import Products from './components/Shop/Products';
 import Notification from './components/UI/Notification';
 import {useDispatch, useSelector} from 'react-redux';
 import {useEffect} from 'react';
-import {updateCart} from './store/index';
+import {sendCartData} from './store/index';
 
 let init = true;
 
@@ -14,44 +14,14 @@ function App() {
   const toggle = useSelector(state => state.showToggle);
   const cart = useSelector(state => state.items);
   const notification = useSelector(state => state.notification);
-  console.log(notification);
 
   useEffect(() => {
-    const fetchCart = async () => {
-      dispatch(updateCart.showNotification({
-        status: 'Sending',
-        title: 'Pending...',
-        message: 'Your request is sending',
-      }));
-
-      const res = await fetch('https://order-9ede6-default-rtdb.asia-southeast1.firebasedatabase.app/cart.json', {
-        method: 'PUT',
-        body: JSON.stringify(cart),
-      });
-
-      if (!res.ok) {
-        throw new Error();
-      }
-
-      dispatch(updateCart.showNotification({
-        status: 'success',
-        title: 'Success',
-        message: 'Your request has been sent',
-      }));
-    };
-
     if (init) {
       init = false;
       return;
     }
 
-    fetchCart().catch(err => {
-      dispatch(updateCart.showNotification({
-        status: 'error',
-        title: 'Error',
-        message: err,
-      }));
-    });
+    dispatch(sendCartData(cart));
   }, [cart, dispatch]);
 
   return (

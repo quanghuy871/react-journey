@@ -7,7 +7,7 @@ const initialState = {
 };
 
 const updateCartSlice = createSlice({
-  name: 'Update Cart',
+  name: 'cart',
   initialState: initialState,
   reducers: {
     updateCart(state, action) {
@@ -51,6 +51,44 @@ const updateCartSlice = createSlice({
     },
   },
 });
+
+export const sendCartData = (data) => {
+  return async (dispatch) => {
+    dispatch(updateCart.showNotification({
+      status: 'Sending',
+      title: 'Pending...',
+      message: 'Your request is sending',
+    }));
+
+    const sendRequest = async () => {
+      const res = await fetch('https://order-9ede6-default-rtdb.asia-southeast1.firebasedatabase.app/cart.json', {
+        method: 'PUT',
+        body: JSON.stringify(data),
+      });
+
+      if (!res.ok) {
+        throw new Error();
+      }
+    };
+
+    try {
+      await sendRequest();
+
+      dispatch(updateCart.showNotification({
+        status: 'success',
+        title: 'Success',
+        message: 'Your request has been sent',
+      }));
+
+    } catch (err) {
+      dispatch(updateCart.showNotification({
+        status: 'error',
+        title: 'Error',
+        message: err,
+      }));
+    }
+  };
+};
 
 const store = configureStore({
   reducer: updateCartSlice.reducer,
