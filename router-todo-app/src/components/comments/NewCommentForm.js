@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import {useRef} from 'react';
 
 import classes from './NewCommentForm.module.css';
 
@@ -9,8 +9,9 @@ const NewCommentForm = (props) => {
     event.preventDefault();
 
     // optional: Could validate here
+    const comment = commentTextRef.current.value;
 
-    // send comment to server
+    props.onAddComment({text: comment});
   };
 
   return (
