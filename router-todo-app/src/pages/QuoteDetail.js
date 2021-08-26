@@ -1,7 +1,7 @@
 import React from 'react';
 import HighlightedQuote from '../components/quotes/HighlightedQuote';
 import Comments from '../components/comments/Comments';
-import {useParams} from 'react-router-dom';
+import {useParams, Route} from 'react-router-dom';
 
 function QuoteDetail(props) {
   const params = useParams();
@@ -10,7 +10,9 @@ function QuoteDetail(props) {
   return (
     <div>
       <HighlightedQuote text={quote.text} author={quote.author}/>
-      <Comments/>
+      <Route path={`/quotes/${params.quoteId}/comments`}>
+        <Comments/>
+      </Route>
     </div>
   );
 }
