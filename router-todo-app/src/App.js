@@ -4,22 +4,13 @@ import AllQuotes from './pages/AllQuotes';
 import Layout from './components/layout/layout';
 import QuoteForm from './components/quotes/QuoteForm';
 import QuoteDetail from './pages/QuoteDetail';
-import {useEffect} from 'react';
 
 const DUMMY_QUOTES = [];
 
 function App() {
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000)
-  }, [loading]);
 
   const addQuoteHandler = (newQuotes) => {
     DUMMY_QUOTES.push(newQuotes);
-    setLoading(!loading);
   };
 
   return (
@@ -34,7 +25,7 @@ function App() {
         </Route>
 
         <Route path="/add-new">
-          <QuoteForm isLoading={loading} onAddQuote={addQuoteHandler}/>
+          <QuoteForm onAddQuote={addQuoteHandler}/>
         </Route>
 
         <Route path="/quotes/:quoteId">
