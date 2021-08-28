@@ -4,13 +4,34 @@ import AllQuotes from './pages/AllQuotes';
 import Layout from './components/layout/layout';
 import QuoteForm from './components/quotes/QuoteForm';
 import QuoteDetail from './pages/QuoteDetail';
-
-const DUMMY_QUOTES = [];
+import useHttp from './hooks/use-Http';
 
 function App() {
+  const [quotes, setQuotes] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  const addQuoteHandler = (newQuotes) => {
-    DUMMY_QUOTES.push(newQuotes);
+  const dataTransform = (data) => {
+    const quotesArr = [];
+
+    for (const newData in data) {
+      quotesArr.push({
+        id: newData.id,
+        author: newData.author,
+        text: newData.text,
+      });
+    }
+
+    setQuotes(quotesArr);
+  };
+
+  const ddQuoteHandler = (newQuotes) => {
+    const {loading, error, sendRequest} = useHttp({
+      url: 'https://quotes-6a80a-default-rtdb.asia-southeast1.firebasedatabase.app/quotes.json',
+      method: 'POST',
+      body: newQuotes,
+    }, dataTransform);
+
+    setLoading(loading);
   };
 
   return (
@@ -21,15 +42,15 @@ function App() {
         </Route>
 
         <Route path="/quotes" exact>
-          <AllQuotes quotes={DUMMY_QUOTES}/>
+          <AllQuotes quotes={quotes}/>
         </Route>
 
         <Route path="/add-new">
-          <QuoteForm onAddQuote={addQuoteHandler}/>
+          <QuoteForm isLoading={loading} onAddQuote={AddQuoteHandler}/>
         </Route>
 
         <Route path="/quotes/:quoteId">
-          <QuoteDetail quotes={DUMMY_QUOTES}/>
+          <QuoteDetail quotes={quotes}/>
         </Route>
       </Switch>
     </Layout>
