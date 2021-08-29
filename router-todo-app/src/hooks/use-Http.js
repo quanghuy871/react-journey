@@ -4,12 +4,12 @@ const useHttp = (request, applyData) => {
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const sendRequest = async () => {
+  const sendRequest = async (newQuote) => {
     try {
       setLoading(true);
       const res = await fetch(request.url, {
         method: request.method ? request.method : 'GET',
-        body: JSON.stringify(request.body),
+        body: JSON.stringify(newQuote),
         headers: request.headers || {},
       });
 
@@ -18,6 +18,7 @@ const useHttp = (request, applyData) => {
       }
 
       const data = await res.json();
+      console.log(data);
       applyData(data);
 
     } catch (e) {

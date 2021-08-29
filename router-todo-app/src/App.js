@@ -8,7 +8,7 @@ import useHttp from './hooks/use-Http';
 
 function App() {
   const [quotes, setQuotes] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState(false);
 
   const dataTransform = (data) => {
     const quotesArr = [];
@@ -24,13 +24,13 @@ function App() {
     setQuotes(quotesArr);
   };
 
-  const ddQuoteHandler = (newQuotes) => {
-    const {loading, error, sendRequest} = useHttp({
-      url: 'https://quotes-6a80a-default-rtdb.asia-southeast1.firebasedatabase.app/quotes.json',
-      method: 'POST',
-      body: newQuotes,
-    }, dataTransform);
+  const {loading, error, sendRequest} = useHttp({
+    url: 'https://quotes-6a80a-default-rtdb.asia-southeast1.firebasedatabase.app/quotes.json',
+    method: 'POST',
+  }, dataTransform);
 
+  const AddQuoteHandler = (newQuotes) => {
+    sendRequest(newQuotes);
     setLoading(loading);
   };
 
@@ -46,7 +46,7 @@ function App() {
         </Route>
 
         <Route path="/add-new">
-          <QuoteForm isLoading={loading} onAddQuote={AddQuoteHandler}/>
+          <QuoteForm isLoading={isLoading} onAddQuote={AddQuoteHandler}/>
         </Route>
 
         <Route path="/quotes/:quoteId">
