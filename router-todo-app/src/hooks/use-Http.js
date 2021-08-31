@@ -1,12 +1,12 @@
 import {useState} from 'react';
 
 const useHttp = (request, applyData) => {
-  const [isLoading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
   const sendRequest = async (newQuote) => {
     try {
-      setLoading(true);
+      console.log('TRY Works');
       const res = await fetch(request.url, {
         method: request.method ? request.method : 'GET',
         body: JSON.stringify(newQuote),
@@ -18,14 +18,18 @@ const useHttp = (request, applyData) => {
       }
 
       const data = await res.json();
-      console.log(data);
       applyData(data);
+
 
     } catch (e) {
       setError(e.message || 'Something Went Wrong!');
     }
+    console.log('FINISH works');
     setLoading(false);
   };
+
+
+  console.log(isLoading);
 
   return {
     loading: isLoading,

@@ -33,9 +33,9 @@ const QuoteList = (props) => {
       </div>
 
       <ul className={classes.list}>
-        {newArr.map((quote) => (
+        {newArr.map((quote, index) => (
           <QuoteItem
-            key={quote.id}
+            key={index}
             id={quote.id}
             author={quote.author}
             text={quote.text}

@@ -24,14 +24,15 @@ function App() {
     setQuotes(quotesArr);
   };
 
-  const {loading, error, sendRequest} = useHttp({
+  const {loading, sendRequest} = useHttp({
     url: 'https://quotes-6a80a-default-rtdb.asia-southeast1.firebasedatabase.app/quotes.json',
     method: 'POST',
   }, dataTransform);
 
   const AddQuoteHandler = (newQuotes) => {
-    sendRequest(newQuotes);
+    console.log('App works');
     setLoading(loading);
+    sendRequest(newQuotes);
   };
 
   return (
