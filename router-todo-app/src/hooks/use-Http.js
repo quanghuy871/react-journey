@@ -15,11 +15,11 @@ const useHttp = (request, applyData) => {
 
       if (!res.ok) {
         throw new Error('Request failed');
-
       }
 
       const data = await res.json();
       applyData(data);
+
 
 
     } catch (e) {
