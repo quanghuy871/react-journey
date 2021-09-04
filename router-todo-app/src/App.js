@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Route, Switch, Redirect} from 'react-router-dom';
 import AllQuotes from './pages/AllQuotes';
 import Layout from './components/layout/layout';
@@ -19,15 +19,19 @@ function App() {
         author: newData.author,
         text: newData.text,
       });
-    }
 
+    }
     setQuotes(quotesArr);
   };
 
   const {loading, sendRequest} = useHttp({
     url: 'https://quotes-6a80a-default-rtdb.asia-southeast1.firebasedatabase.app/quotes.json',
-    method: 'POST',
+    method: 'GET',
   }, dataTransform);
+
+  useEffect(() => {
+    setLoading(false);
+  }, [loading]);
 
   const AddQuoteHandler = (newQuotes) => {
     console.log('App works');

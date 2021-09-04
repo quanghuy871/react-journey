@@ -9,8 +9,8 @@ const useHttp = (request, applyData) => {
       console.log('TRY Works');
       const res = await fetch(request.url, {
         method: request.method ? request.method : 'GET',
-        body: JSON.stringify(newQuote),
-        headers: request.headers || {},
+        body: request.body ? JSON.stringify(request.body) : null,
+        headers: request.headers ? request.headers : {},
       });
 
       if (!res.ok) {
@@ -19,8 +19,7 @@ const useHttp = (request, applyData) => {
 
       const data = await res.json();
       applyData(data);
-
-
+      console.log(data);
 
     } catch (e) {
       setError(e.message || 'Something Went Wrong!');
@@ -28,9 +27,6 @@ const useHttp = (request, applyData) => {
     console.log('FINISH works');
     setLoading(false);
   };
-
-
-  console.log(isLoading);
 
   return {
     loading: isLoading,
