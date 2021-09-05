@@ -8,35 +8,34 @@ import useHttp from './hooks/use-Http';
 
 function App() {
   const [quotes, setQuotes] = useState([]);
-  const [isLoading, setLoading] = useState(false);
-
-  const dataTransform = (data) => {
-    const quotesArr = [];
-
-    for (const newData in data) {
-      quotesArr.push({
-        id: newData.id,
-        author: newData.author,
-        text: newData.text,
-      });
-
-    }
-    setQuotes(quotesArr);
-  };
-
-  const {loading, sendRequest} = useHttp({
-    url: 'https://quotes-6a80a-default-rtdb.asia-southeast1.firebasedatabase.app/quotes.json',
-    method: 'GET',
-  }, dataTransform);
+  const [isLoading, setLoading] = useState(true);
+  const {sendRequest} = useHttp();
 
   useEffect(() => {
-    setLoading(false);
-  }, [loading]);
+    console.log('EFFECT WORK');
+    const dataTransform = (data) => {
+      const quotesArr = [];
+
+      for (const newData in data) {
+        quotesArr.push({
+          id: data[newData].id,
+          author: data[newData].author,
+          text: data[newData].text,
+        });
+
+      }
+      setLoading(false);
+      setQuotes(quotesArr);
+    };
+
+    sendRequest({
+      url: 'https://quotes-6a80a-default-rtdb.asia-southeast1.firebasedatabase.app/quotes.json',
+    }, dataTransform);
+  }, [sendRequest]);
 
   const AddQuoteHandler = (newQuotes) => {
     console.log('App works');
-    setLoading(loading);
-    sendRequest(newQuotes);
+    setQuotes((prevQuotes) => prevQuotes.concat(newQuotes));
   };
 
   return (
@@ -47,11 +46,11 @@ function App() {
         </Route>
 
         <Route path="/quotes" exact>
-          <AllQuotes quotes={quotes}/>
+          <AllQuotes isLoading={isLoading} quotes={quotes}/>
         </Route>
 
         <Route path="/add-new">
-          <QuoteForm isLoading={isLoading} onAddQuote={AddQuoteHandler}/>
+          <QuoteForm onAddQuote={AddQuoteHandler}/>
         </Route>
 
         <Route path="/quotes/:quoteId">

@@ -1,10 +1,10 @@
-import {useState} from 'react';
+import {useState, useCallback} from 'react';
 
-const useHttp = (request, applyData) => {
+const useHttp = () => {
   const [isLoading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  const sendRequest = async (newQuote) => {
+  const sendRequest = useCallback(async (request, applyData) => {
     try {
       console.log('TRY Works');
       const res = await fetch(request.url, {
@@ -19,14 +19,13 @@ const useHttp = (request, applyData) => {
 
       const data = await res.json();
       applyData(data);
-      console.log(data);
 
     } catch (e) {
       setError(e.message || 'Something Went Wrong!');
     }
     console.log('FINISH works');
     setLoading(false);
-  };
+  }, []);
 
   return {
     loading: isLoading,
