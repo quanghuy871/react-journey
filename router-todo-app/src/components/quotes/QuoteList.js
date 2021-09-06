@@ -29,7 +29,7 @@ const QuoteList = (props) => {
   return (
     <Fragment>
       <div className={classes.sorting}>
-        <button onClick={sortList}>Sort {isSorting ? 'Descending' : 'Ascending'}</button>
+        <button onClick={sortList}>Sort {isSorting() ? 'Descending' : 'Ascending'}</button>
       </div>
 
       <ul className={classes.list}>

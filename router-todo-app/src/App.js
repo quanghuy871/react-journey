@@ -35,6 +35,7 @@ function App() {
 
   const AddQuoteHandler = (newQuotes) => {
     console.log('App works');
+
     setQuotes((prevQuotes) => prevQuotes.concat(newQuotes));
   };
 

@@ -3,12 +3,15 @@ import Card from '../UI/Card';
 import LoadingSpinner from '../UI/LoadingSpinner';
 import classes from './QuoteForm.module.css';
 import useHttp from '../../hooks/use-Http';
+import {useHistory, useLocation} from 'react-router-dom';
 
 const QuoteForm = (props) => {
   const authorInputRef = useRef();
   const textInputRef = useRef();
   const [isLoading, setLoading] = useState(false);
   const {loading, sendRequest} = useHttp();
+  const history = useHistory();
+  const location = useLocation();
 
   const submitFormHandler = async (event) => {
     event.preventDefault();
@@ -28,6 +31,9 @@ const QuoteForm = (props) => {
     });
 
     setLoading(false);
+    authorInputRef.current.value = '';
+    textInputRef.current.value = '';
+    history.push(`${location.pathname}`);
     props.onAddQuote(newQuotes);
   };
 
