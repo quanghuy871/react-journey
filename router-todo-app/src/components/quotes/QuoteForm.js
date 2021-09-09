@@ -33,7 +33,7 @@ const QuoteForm = (props) => {
     setLoading(false);
     authorInputRef.current.value = '';
     textInputRef.current.value = '';
-    history.push(`${location.pathname}`);
+    // history.push(`${location.pathname}`);
     props.onAddQuote(newQuotes);
   };
 
