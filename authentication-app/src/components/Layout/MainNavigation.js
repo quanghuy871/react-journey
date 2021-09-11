@@ -1,10 +1,17 @@
 import {Link} from 'react-router-dom';
 
 import classes from './MainNavigation.module.css';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
+import {logout} from '../../store/index';
 
 const MainNavigation = () => {
   const isLoggedIn = useSelector(state => state.isLoggedIn);
+  const dispatch = useDispatch();
+
+  const logOutHandler = (e) => {
+    e.preventDefault();
+    dispatch(logout());
+  };
 
   return (
     <header className={classes.header}>
@@ -29,7 +36,7 @@ const MainNavigation = () => {
           {
             isLoggedIn &&
             <li>
-              <button>Logout</button>
+              <button onClick={logOutHandler}>Logout</button>
             </li>
           }
         </ul>

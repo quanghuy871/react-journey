@@ -14,8 +14,9 @@ const stateSlice = createSlice({
       state.token = action.payload;
     },
 
-    logout(state, actions) {
+    logout(state) {
       state.isLoggedIn = false;
+      state.token = null;
     },
   },
 });
