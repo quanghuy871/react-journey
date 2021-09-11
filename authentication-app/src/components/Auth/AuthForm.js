@@ -3,12 +3,14 @@ import {useState, useRef} from 'react';
 import classes from './AuthForm.module.css';
 import {useDispatch} from 'react-redux';
 import {login} from '../../store/index';
+import {useHistory} from 'react-router-dom';
 
 const AuthForm = () => {
   const [isLogin, setIsLogin] = useState(true);
   const emailEntered = useRef();
   const passwordEntered = useRef();
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const switchAuthModeHandler = () => {
     setIsLogin((prevState) => !prevState);
@@ -47,6 +49,7 @@ const AuthForm = () => {
 
       const data = await res.json();
       dispatch(login(data.idToken));
+      history.replace('/');
     } catch (e) {
       alert(e);
     }
