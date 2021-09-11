@@ -39,6 +39,7 @@ const MainNavigation = () => {
               <button onClick={logOutHandler}>Logout</button>
             </li>
           }
+
         </ul>
       </nav>
     </header>

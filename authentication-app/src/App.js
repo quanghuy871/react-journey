@@ -31,6 +31,7 @@ function App() {
         <Route path='*'>
           <Redirect to='/auth'/>
         </Route>
+
       </Switch>
     </Layout>
   );
