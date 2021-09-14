@@ -16,12 +16,20 @@ const DUMMY_MEETUP = [
   },
 ];
 
-function Home() {
+function Home(props) {
   return (
     <div>
-      <MeetupList meetups={DUMMY_MEETUP}/>
+      <MeetupList meetups={props.meetup}/>
     </div>
   );
+}
+
+export async function getStaticProps() {
+  return {
+    props: {
+      meetup: DUMMY_MEETUP,
+    },
+  };
 }
 
 export default Home;
