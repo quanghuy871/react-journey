@@ -44,6 +44,7 @@ export async function getStaticProps(context) {
 
   const meetup = await collection.findOne({_id: ObjectId(context.params.meetupId)});
 
+
   client.close();
 
   return {
