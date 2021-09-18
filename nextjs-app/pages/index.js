@@ -1,6 +1,7 @@
 import React from 'react';
 import MeetupList from '../components/meetups/MeetupList';
 import {MongoClient} from 'mongodb';
+import {MONGOURL} from './api/new-meetup';
 
 function Home(props) {
   return (
@@ -11,7 +12,7 @@ function Home(props) {
 }
 
 export async function getStaticProps() {
-  const client = await MongoClient.connect('mongodb+srv://meetup-database:FbTMJ6NrsHRxm6BR@cluster1.3pv3r.mongodb.net/meetups?retryWrites=true&w=majority');
+  const client = await MongoClient.connect(MONGOURL);
 
   const database = client.db();
 
