@@ -11,6 +11,7 @@ export default async function handler(req, res) {
 
     const database = client.db();
 
+
     const collection = database.collection('meetups');
 
     const result = await collection.insertOne(data);
